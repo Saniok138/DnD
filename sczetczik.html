@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>7 Liczników</title>
+    <style>
+        h1{
+            font-size: small;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .counter-container {
+            text-align: center;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .counter {
+            font-size: small;
+            margin: 0 10px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="counter-container">
+            <h1>Krasnoreczije&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter1">40</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Wynosliwost&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter2">55</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Sila&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter3">45</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Sila duha&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter4">55</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Mana&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter5">50</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Obuczajemost&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter6">50</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+        
+        <div class="counter-container">
+            <h1>Skorost&nbsp;</h1>
+            <button class="btn" data-action="decrease">-</button>
+            <h1 class="counter" data-counter="counter7">55</h1>
+            <button class="btn" data-action="increase">+</button>
+        </div>
+    </div>
+
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const buttons = document.querySelectorAll('.btn');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.getAttribute('data-action');
+                const counter = button.parentElement.querySelector('.counter');
+                let value = parseInt(counter.textContent, 10);
+                const counterKey = counter.getAttribute('data-counter');
+
+                if (action === 'increase') {
+                    value++;
+                } else if (action === 'decrease') {
+                    value--;
+                }
+
+                counter.textContent = value;
+
+                // Zapisujemy wartość licznika do localStorage
+                localStorage.setItem(counterKey, value.toString());
+            });
+        });
+
+        // Przywracamy zapisane dane z localStorage
+        counters.forEach(counter => {
+            const counterKey = counter.getAttribute('data-counter');
+            const storedValue = localStorage.getItem(counterKey);
+            if (storedValue !== null) {
+                counter.textContent = storedValue;
+            }
+        });
+    </script>
+</body>
+</html>

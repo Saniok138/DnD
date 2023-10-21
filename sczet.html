@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kostka na 32 strony z animacją</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .cube {
+            width: 150px;
+            height: 150px;
+            background-color: blue;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .cube.roll {
+            animation: rotate 0.5s linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cube" id="cube">0</div>
+    </div>
+
+    <script>
+        const cube = document.getElementById('cube');
+
+        function rollDice() {
+            const result = Math.floor(Math.random() * 32) + 1;
+            cube.textContent = result;
+            cube.classList.add('roll');
+            setTimeout(() => cube.classList.remove('roll'), 1000);
+        }
+
+        cube.addEventListener('click', rollDice);
+    </script>
+</body>
+</html>
